@@ -11,7 +11,7 @@ import requests
 
 from tmdbv3api import TMDb
 tmdb = TMDb()
-tmdb.api_key = 'YOUR_API_KEY'
+tmdb.api_key = 'cb1c62fa4fb3acd10420f9f9d4df81d4'
 
 from tmdbv3api import Movie
 
@@ -37,6 +37,8 @@ def rcmd(m):
         sim.shape
     except:
         data, sim = create_sim()
+
+    # breakpoint()
     if m not in data['movie_title'].unique():
         return('Sorry! The movie your searched is not in our database. Please check the spelling or try with some other movies')
     else:
@@ -92,6 +94,7 @@ def home():
 def recommend():
     movie = request.args.get('movie') # get movie name from the URL
     r = rcmd(movie)
+    # print('r is',r)
     movie = movie.upper()
     if type(r)==type('string'): # no such movie found in the database
         return render_template('recommend.html',movie=movie,r=r,t='s')
